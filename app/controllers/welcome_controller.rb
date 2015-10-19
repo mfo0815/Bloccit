@@ -11,4 +11,7 @@ class WelcomeController < ApplicationController
   def faq
 >>>>>>> bloccit-static
   end
+
+  def faq
+  end
 end
