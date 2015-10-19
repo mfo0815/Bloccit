@@ -3,7 +3,11 @@ Rails.application.routes.draw do
 
   get 'welcome/about'
 
+<<<<<<< HEAD
   get 'welcome/contact'
+=======
+  get 'welcome/faq'
+>>>>>>> bloccit-static
 
   root to: 'welcome#index'
 
