@@ -33,6 +33,7 @@ class PostsController < ApplicationController
   def edit
     @post = Post.find(params[:id])
   end
+
   def update
   @post = Post.find(params[:id])
   @post.title = params[:post][:title]
@@ -49,7 +50,7 @@ end
 
 def destroy
      @post = Post.find(params[:id])
- 
+
      if @post.destroy
        flash[:notice] = "\"#{@post.title}\" was deleted successfully."
        redirect_to posts_path
