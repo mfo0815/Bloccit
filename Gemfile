@@ -32,3 +32,6 @@ end
  gem 'turbolinks'
 
 gem 'bootstrap-sass'
+
+#used for encrypting user password_digest
+gem 'bcrypt'
