@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "password") }
+  it {should have_many(:posts)}
   let(:user_two_first_name) { "bloccit" }
   let(:user_two_last_name) { "usertwo" }
   let(:user_two) { User.new(name: "#{user_two_first_name} #{user_two_last_name}", email: "user2@bloccit.com", password: "password") }
