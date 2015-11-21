@@ -1,6 +1,6 @@
 
 <h1>
-   <%= @post.title %> <br>
+   <%= @post.title %> <%= render partial: "ratings/display", locals: { r: @post.rating } %><br>
    <small>
      submitted <%= time_ago_in_words(@post.created_at) %> ago by <%= @post.user.name %>
    </small>
@@ -12,7 +12,7 @@
     </div>
   </div>
   <br />
-  
+
 <div class="row">
   <div class="col-md-8">
     <p><%= @post.body %></p>
