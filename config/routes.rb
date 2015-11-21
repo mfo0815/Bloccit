@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :labels, only: [:show]
+
   resources :questions
   resources :advertisements
 
@@ -9,7 +11,7 @@ Rails.application.routes.draw do
    end
 
    resources :posts, only: [] do
-  
+
         resources :comments, only: [:create, :destroy]
       end
 
