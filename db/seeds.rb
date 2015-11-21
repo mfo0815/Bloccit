@@ -49,11 +49,18 @@ topics = Topic.all
  Post.find_or_create_by(title: "A unique title", body: "A unique body")
  puts "#{Post.count}"
 
- user = User.first
-  user.update_attributes!(
-    email: 'mfo0815@gmail.com',
-    password: 'helloworld'
-  )
+ admin = User.create!(
+  name:     'Admin User',
+  email:    'admin@example.com',
+  password: 'helloworld',
+  role:     'admin'
+)
+
+  member = User.create!(
+  name:     'Member User',
+  email:    'member@example.com',
+  password: 'helloworld'
+)
 
  puts "Seed finished"
  puts "#{User.count} users created"
