@@ -4,6 +4,6 @@ class Topic < ActiveRecord::Base
   validates :description, length: { minimum: 15 }, presence: true
   has_many :labelings, as: :labelable
   has_many :labels, through: :labelings
-  has_many :sponsored_posts, dependent: :destroy
-  has_one :rating
+
+  scope :visible_to, -> (user) { user ? all : where(public: true) }
 end
