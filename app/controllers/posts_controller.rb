@@ -18,7 +18,6 @@ class PostsController < ApplicationController
 
     if @post.save
       @post.labels = Label.update_labels(params[:post][:labels])
-      @post.rating = Rating.update_rating(params[:post][:rating])
       flash[:notice] = "Post was saved."
       redirect_to [@topic, @post]
     else
@@ -37,7 +36,6 @@ class PostsController < ApplicationController
 
     if @post.save
       @post.labels = Label.update_labels(params[:post][:labels])
-      @post.rating = Rating.update_rating(params[:post][:rating])
       flash[:notice] = "Post was updated."
       redirect_to [@post.topic, @post]
     else
@@ -65,8 +63,8 @@ class PostsController < ApplicationController
 
   def authorize_user
     post = Post.find(params[:id])
-    unless current_user == post.user || current_user.admin? || current_user.moderator?
-      flash[:error] = "You must be an admin or moderator to do that."
+    unless current_user == post.user || current_user.admin?
+      flash[:error] = "You must be an admin to do that."
       redirect_to [post.topic, post]
     end
   end
