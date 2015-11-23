@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
   before_save { self.role ||= :member }
 
-  EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  EMAIL_REGEX = /\A[\w\-.]@[a-z\d\-.]\.[a-z]\z/i
 
   validates :name, length: { minimum: 1, maximum: 100 }, presence: true
   validates :password, presence: true, length: { minimum: 6 }, if: "password_digest.nil?"
@@ -39,6 +39,19 @@ class User < ActiveRecord::Base
      gravatar_id = Digest::MD5::hexdigest(self.email).downcase
      "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
    end
+
+   def has_posts?
+       posts.count > 0
+     end
+
+     def has_comments?
+       comments.count > 0
+     end
+
+     def has_favorites?
+       favorites.count > 0
+     end
+    end
 
   after_save  :set_uppercase
 
