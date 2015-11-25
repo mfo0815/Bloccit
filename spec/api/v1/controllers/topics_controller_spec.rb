@@ -80,6 +80,7 @@ require 'rails_helper'
        my_user.admin!
        controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(my_user.auth_token)
        @new_topic = build(:topic)
+       @new_post = build(:post)
      end
 
      describe "PUT update" do
@@ -99,23 +100,24 @@ require 'rails_helper'
        end
      end
 
-     describe "POST create" do
-       before { post :create, topic: {name: @new_topic.name, description: @new_topic.description} }
+     describe "POST create_post" do
+      before { post :create_post, id: my_topic.id, post: {title: @new_post.title, body: @new_post.body} }
 
-       it "returns http success" do
-         expect(response).to have_http_status(:success)
-       end
+      it "returns http success" do
+        expect(response).to have_http_status(:success)
+      end
 
-       it "returns json content type" do
-         expect(response.content_type).to eq 'application/json'
-       end
+      it "returns json content type" do
+        expect(response.content_type).to eq 'application/json'
+      end
 
-       it "creates a topic with the correct attributes" do
-         hashed_json = JSON.parse(response.body)
-         expect(@new_topic.name).to eq hashed_json["name"]
-         expect(@new_topic.description).to eq hashed_json["description"]
-       end
-     end
+      it "creates a topic with the correct attributes" do
+        hashed_json = JSON.parse(response.body)
+        expect(@new_post.title).to eq hashed_json["title"]
+        expect(@new_post.body).to eq hashed_json["body"]
+      end
+    end
+
 
      describe "DELETE destroy" do
       before { delete :destroy, id: my_topic.id }
